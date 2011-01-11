@@ -49,6 +49,19 @@
 	}
 }
 
+- (void) getTwittersByUserIdAsXml:(NSInteger) userId beforeId:(NSNumber *) beforeId {
+	unsigned long long idValue = [beforeId unsignedLongLongValue];
+	NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:
+									 @"http://api.twitter.com/1/statuses/user_timeline.xml?user_id=%d&max_id=%llu&trim_user=true&count=30",
+									 userId, idValue]];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+	connection = [[NSURLConnection alloc] initWithRequest:request
+												 delegate:self];
+	if (connection) {
+		webData = [[NSMutableData data] retain];
+	}
+}
+
 - (void) getContentByUrl: (NSURL*) url {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
 	connection = [[NSURLConnection alloc] initWithRequest:request

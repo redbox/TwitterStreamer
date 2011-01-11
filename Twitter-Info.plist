@@ -18,5 +18,7 @@
 	<string>1.0</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>CFBundleIconFile</key>
+	<string>app-icon.png</string>
 </dict>
 </plist>
