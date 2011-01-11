@@ -16,18 +16,6 @@
 @synthesize imageUrl;
 @synthesize image;
 
-- (TwitterUser *) initDefault {
-	self = [super init];
-	if (self) {
-		self.uid = 59402420;
-		self.name = @"FlatSoft, LLC";
-		self.screenName = @"flatsoft";
-		self.imageUrl = @"asdasd";
-		self.image = nil;
-	}
-	return self;
-}
-
 - (void)dealloc {
 	[name release];
 	[screenName release];

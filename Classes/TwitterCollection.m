@@ -46,12 +46,20 @@
 	[service startUserByNameApiRequest: self.userName];
 }
 
-- (void) updateLaterTwitters {
+- (void) updateNewTwitters {
 	if (delegate) {
 		[delegate updateStarted];
 	}
 	NSNumber *number = [[[NSNumber alloc] initWithLongLong: lastTwitterId] autorelease];
 	[service startTwittersByUserIdApiRequest: self.twitterUser.uid sinceId: number];
+}
+
+- (void) updateOldTwitters {
+	if (delegate) {
+		[delegate updateStarted];
+	}
+	NSNumber *number = [[[NSNumber alloc] initWithLongLong: (firstTwitterId - 1)] autorelease];
+	[service startTwittersByUserIdApiRequest: self.twitterUser.uid beforeId: number];
 }
 
 - (void)processTwitterUser:(TwitterUser *) user {

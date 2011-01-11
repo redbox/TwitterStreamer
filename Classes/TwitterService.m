@@ -44,6 +44,14 @@
 	}
 }
 
+- (void) startTwittersByUserIdApiRequest:(NSInteger) userId beforeId: (NSNumber *) beforeId {
+	if (!isHelperBusy) {
+		isHelperBusy = NO;
+		isGettingUser = NO;
+		[networkHelper getTwittersByUserIdAsXml: userId beforeId: beforeId];
+	}
+}
+
 - (void) processApiResponse:(NSData*) response {
 	isHelperBusy = NO;
 	if (isGettingUser) { // grab user

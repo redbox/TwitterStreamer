@@ -20,18 +20,6 @@
 @synthesize createdAtAsTimeAgo;
 @synthesize createdAt;
 
-- (Twitter *) initDefault {
-	self = [super init];
-	if (self) {
-		self.uid = [[NSNumber alloc] initWithInt: 1];
-		self.userId = 59402420;
-		self.text = @"Hello! This is message from twitter! Nice to see your=)";		
-		self.createdAtSource = @"Tue Dec 07 07:43:44 +0000 2010";
-		[self updateDatePresentation];
-	}
-	return self;
-}
-
 - (NSInteger) compareTwitters:(Twitter *) anotherTwitter
 {
 	unsigned long long selfUid = [[self uid] longLongValue];
