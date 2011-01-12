@@ -33,33 +33,36 @@
 	return self;
 }
 
+- (void) loadAvailableTwitters {
+	if ([service startUserByNameApiRequest: self.userName] == YES) {
+		if (delegate) {
+			[delegate updateStarted];
+		}
+	}
+}
+
+- (void) updateNewTwitters {
+	NSNumber *number = [[[NSNumber alloc] initWithLongLong: lastTwitterId] autorelease];	
+	if ([service startTwittersByUserIdApiRequest: self.twitterUser.uid sinceId: number] == YES) {
+		if (delegate) {
+			[delegate updateStarted];
+		}
+	}
+}
+
+- (void) updateOldTwitters {
+	NSNumber *number = [[[NSNumber alloc] initWithLongLong: (firstTwitterId - 1)] autorelease];
+	if ([service startTwittersByUserIdApiRequest: self.twitterUser.uid beforeId: number] == YES) {
+		if (delegate) {
+			[delegate updateStarted];
+		}
+	}
+}
+
 -(void) processImageUpdateFinished: (NSString *)filePath {
 	self.twitterUser.image = [[UIImage alloc] initWithContentsOfFile: filePath];
 	NSNumber *number = [[[NSNumber alloc] initWithLongLong: lastTwitterId] autorelease];
 	[service startTwittersByUserIdApiRequest: self.twitterUser.uid sinceId: number];
-}
-
-- (void) loadAvailableTwitters {
-	if (delegate) {
-		[delegate updateStarted];
-	}
-	[service startUserByNameApiRequest: self.userName];
-}
-
-- (void) updateNewTwitters {
-	if (delegate) {
-		[delegate updateStarted];
-	}
-	NSNumber *number = [[[NSNumber alloc] initWithLongLong: lastTwitterId] autorelease];
-	[service startTwittersByUserIdApiRequest: self.twitterUser.uid sinceId: number];
-}
-
-- (void) updateOldTwitters {
-	if (delegate) {
-		[delegate updateStarted];
-	}
-	NSNumber *number = [[[NSNumber alloc] initWithLongLong: (firstTwitterId - 1)] autorelease];
-	[service startTwittersByUserIdApiRequest: self.twitterUser.uid beforeId: number];
 }
 
 - (void)processTwitterUser:(TwitterUser *) user {

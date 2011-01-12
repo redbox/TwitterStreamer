@@ -168,7 +168,7 @@
 - (void)scrollViewDidScroll:(UITableView *)scrollView
 {
 	if (scrollView == self.twitterView) {
-		if (scrollView.contentOffset.y == 0) {
+		if (scrollView.contentOffset.y < 0) {
 			[twitterCollection updateNewTwitters];
 		} else if ((scrollView.contentOffset.y + 480) == (scrollView.contentSize.height + 64)) {
 			[twitterCollection updateOldTwitters];			

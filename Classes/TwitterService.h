@@ -71,20 +71,20 @@
  * Starts getUserByName API request
  * @param name User's name
  **/
-- (void) startUserByNameApiRequest:(NSString*) name;
+- (BOOL) startUserByNameApiRequest:(NSString*) name;
 
 /**
  * Starts TwittersByUserId API request. Only statuses which was added after target will fetched.
  * @param userId User's id
  * @param sinceId UID Target status's id
  **/
-- (void) startTwittersByUserIdApiRequest:(NSInteger) userId sinceId: (NSNumber *) sinceId;
+- (BOOL) startTwittersByUserIdApiRequest:(NSInteger) userId sinceId: (NSNumber *) sinceId;
 
 /**
  * Starts TwittersByUserId API request. Only statuses which was added before target will fetched.
  * @param userId User's id
  * @param beforeId UID Target status's id
  **/
-- (void) startTwittersByUserIdApiRequest:(NSInteger) userId beforeId: (NSNumber *) beforeId;
+- (BOOL) startTwittersByUserIdApiRequest:(NSInteger) userId beforeId: (NSNumber *) beforeId;
 
 @end

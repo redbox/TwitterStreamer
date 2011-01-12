@@ -28,32 +28,41 @@
 	return self;
 }
 
-- (void) startUserByNameApiRequest:(NSString*) name {
+- (BOOL) startUserByNameApiRequest:(NSString*) name {
 	if (!isHelperBusy) {
 		isHelperBusy = YES;
 		isGettingUser = YES;
 		[networkHelper getTwitterUserByNameAsXml: name];
+		return YES;
+	} else 	{
+		return NO;
 	}
 }
 
-- (void) startTwittersByUserIdApiRequest:(NSInteger) userId sinceId: (NSNumber *) sinceId;{
+- (BOOL) startTwittersByUserIdApiRequest:(NSInteger) userId sinceId: (NSNumber *) sinceId;{
 	if (!isHelperBusy) {
-		isHelperBusy = NO;
+		isHelperBusy = YES;
 		isGettingUser = NO;
 		[networkHelper getTwittersByUserIdAsXml: userId sinceId: sinceId];
+		return YES;
+	} else 	{
+		return NO;
 	}
 }
 
-- (void) startTwittersByUserIdApiRequest:(NSInteger) userId beforeId: (NSNumber *) beforeId {
+- (BOOL) startTwittersByUserIdApiRequest:(NSInteger) userId beforeId: (NSNumber *) beforeId {
 	if (!isHelperBusy) {
-		isHelperBusy = NO;
+		isHelperBusy = YES;
 		isGettingUser = NO;
 		[networkHelper getTwittersByUserIdAsXml: userId beforeId: beforeId];
+		return YES;
+	} else 	{
+		return NO;
 	}
 }
 
 - (void) processApiResponse:(NSData*) response {
-	isHelperBusy = NO;
+	isHelperBusy = NO;	
 	if (isGettingUser) { // grab user
 		TwitterUser *user = [userBuilder newTwitterUserFromXml:response];
 		if (delegate) {
